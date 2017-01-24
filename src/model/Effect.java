@@ -31,13 +31,15 @@ public class Effect {
 	
 	
 	
-	private int randomValue;
+	private int randomValue; //for random based effects
 	private int type;
 	private int target;
 	private int shape;
-	private int origin;
-	private int range;
-	private int duration;
-	private int delay;
+	private int originMin;
+	private int originMax;
+	private int rangeMin;
+	private int rangeMax;
+	private int duration; // -1 for trigger
+	private int delay;	//for effects activating some turns after others
 	
 }

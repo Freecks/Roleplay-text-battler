@@ -23,6 +23,7 @@ public class Menu extends JFrame implements ActionListener{
 	private JPanel frame;
 	private JButton local;
 	private JButton online;
+	private JButton creation;
 	private JButton howToPlay;
 	private JButton settings;
 	private JButton exit;
@@ -30,6 +31,7 @@ public class Menu extends JFrame implements ActionListener{
 	private String sTitle;
 	private String sButtonLocal;
 	private String sButtonOnline;
+	private String sButtonCreation;
 	private String sButtonHowToPlay;
 	private String sButtonSettings;
 	private String sButtonExit;
@@ -45,12 +47,13 @@ public class Menu extends JFrame implements ActionListener{
 		local = new JButton(sButtonLocal);
 		online = new JButton(sButtonOnline);
 		online.setEnabled(false);
+		creation = new JButton(sButtonCreation);
+		creation.addActionListener(this);
 		howToPlay = new JButton(sButtonHowToPlay);
 		settings = new JButton(sButtonSettings);
 		settings.addActionListener(this);
 		exit = new JButton(sButtonExit);
 		exit.addActionListener(this);
-		
 		
 		
 		c.fill = GridBagConstraints.BOTH;
@@ -63,10 +66,12 @@ public class Menu extends JFrame implements ActionListener{
 		c.gridy = 1;
 		frame.add(online,c);
 		c.gridy = 2;
-		frame.add(howToPlay,c);
+		frame.add(creation,c);
 		c.gridy = 3;
-		frame.add(settings,c);
+		frame.add(howToPlay,c);
 		c.gridy = 4;
+		frame.add(settings,c);
+		c.gridy = 5;
 		frame.add(exit,c);
 		
 		this.setContentPane(frame);
@@ -100,6 +105,7 @@ public class Menu extends JFrame implements ActionListener{
 			sTitle = EN_en.TITLE;
 			sButtonLocal = EN_en.BUTTON_LOCAL;
 			sButtonOnline = EN_en.BUTTON_ONLINE;
+			sButtonCreation = EN_en.BUTTON_CREATION;
 			sButtonHowToPlay = EN_en.BUTTON_HOWTOPLAY;
 			sButtonSettings = EN_en.BUTTON_SETTINGS;
 			sButtonExit = EN_en.BUTTON_EXIT;
@@ -109,6 +115,7 @@ public class Menu extends JFrame implements ActionListener{
 			sTitle = FR_fr.TITLE;
 			sButtonLocal = FR_fr.BUTTON_LOCAL;
 			sButtonOnline = FR_fr.BUTTON_ONLINE;
+			sButtonCreation = FR_fr.BUTTON_CREATION;
 			sButtonHowToPlay = FR_fr.BUTTON_HOWTOPLAY;
 			sButtonSettings = FR_fr.BUTTON_SETTINGS;
 			sButtonExit = FR_fr.BUTTON_EXIT;
@@ -123,6 +130,10 @@ public class Menu extends JFrame implements ActionListener{
 		if(e.getSource() == exit) System.exit(0);
 		if(e.getSource() == settings){
 			new Settings();
+			this.dispose();
+		}
+		if(e.getSource() == creation){
+			new Creation();
 			this.dispose();
 		}
 	}

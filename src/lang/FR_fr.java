@@ -5,6 +5,7 @@ public class FR_fr {
 	public static final String TITLE = "Roleplay text battler";
 	public static final String BUTTON_LOCAL = "Local";
 	public static final String BUTTON_ONLINE = "En ligne";
+	public static final String BUTTON_CREATION = "Création";
 	public static final String BUTTON_HOWTOPLAY = "Comment jouer ?";
 	public static final String BUTTON_SETTINGS = "Réglages";
 	public static final String BUTTON_EXIT = "Quitter";
