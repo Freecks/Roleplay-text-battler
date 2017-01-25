@@ -1,4 +1,4 @@
-package View;
+package View.creation;
 
 import javax.swing.JPanel;
 

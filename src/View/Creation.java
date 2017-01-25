@@ -12,6 +12,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import View.creation.CreationBio;
+import View.creation.CreationCapacities;
+import View.creation.CreationEquipments;
+import View.creation.CreationLimbs;
 import lang.EN_en;
 
 public class Creation extends JFrame implements ActionListener{
@@ -34,9 +38,10 @@ public class Creation extends JFrame implements ActionListener{
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		listChar = new JList();
-		bio = new JPanel();
+		bio = new CreationBio();
 		parts = new JTabbedPane();
 		back = new JButton("<-");
+		back.addActionListener(this);
 		limbs = new CreationLimbs();
 		equipments = new CreationEquipments();
 		capacities = new CreationCapacities();
@@ -87,8 +92,12 @@ public class Creation extends JFrame implements ActionListener{
 
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == back){
+			new Menu();
+			this.dispose();
+		}
+			
 		
 	}
 
