@@ -17,5 +17,13 @@ public class EN_en {
 	public static final String LANGUAGE_EN = "English";
 	public static final String BUTTON_ACCEPT = "Accept";
 	public static final String BUTTON_CANCEL = "Cancel";
-
+	
+	public static final String LABEL_NAME = "Name :";
+	public static final String LABEL_BIO = "Description :";
+	public static final String LABEL_BUTTON_IMAGE = "Change picture";
+	
+	public static final String TAB_CAPACITIES = "Capacities";
+	public static final String TAB_LIMBS = "Limbs";
+	public static final String TAB_EQUIPMENTS = "Equipments";
+	
 }

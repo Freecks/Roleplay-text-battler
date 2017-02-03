@@ -15,4 +15,12 @@ public class FR_fr {
 	public static final String LANGUAGE_EN = "Anglais";
 	public static final String BUTTON_ACCEPT = "Accepter";
 	public static final String BUTTON_CANCEL = "Annuler";
+	
+	public static final String LABEL_NAME = "Nom :";
+	public static final String LABEL_BIO = "Description :";
+	public static final String LABEL_BUTTON_IMAGE = "Changer l'image";
+	
+	public static final String TAB_CAPACITIES = "Capacités";
+	public static final String TAB_LIMBS = "Membres";
+	public static final String TAB_EQUIPMENTS = "Equipements";
 }

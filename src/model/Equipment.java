@@ -8,4 +8,5 @@ public class Equipment {
 	
 	private String name;
 	private String description;
+	private int type;
 }
