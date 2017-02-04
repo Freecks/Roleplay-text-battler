@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -15,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 
-import lang.EN_en;
-import lang.FR_fr;
 
 public class Menu extends JFrame implements ActionListener{
 
@@ -96,33 +96,20 @@ public class Menu extends JFrame implements ActionListener{
 			prop.load(input);
 			language = prop.getProperty("language");
 			input.close();
+			
+			input = new FileInputStream("lang/" + language + ".properties");
+			prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
+			sTitle = prop.getProperty("TITLE");
+			sButtonLocal = prop.getProperty("BUTTON_LOCAL");
+			sButtonOnline = prop.getProperty("BUTTON_ONLINE");
+			sButtonCreation = prop.getProperty("BUTTON_CREATION");
+			sButtonHowToPlay = prop.getProperty("BUTTON_HOWTOPLAY");
+			sButtonSettings = prop.getProperty("BUTTON_SETTINGS");
+			sButtonExit = prop.getProperty("BUTTON_EXIT");
+			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		switch (language) {
-		case "EN_en":
-			sTitle = EN_en.TITLE;
-			sButtonLocal = EN_en.BUTTON_LOCAL;
-			sButtonOnline = EN_en.BUTTON_ONLINE;
-			sButtonCreation = EN_en.BUTTON_CREATION;
-			sButtonHowToPlay = EN_en.BUTTON_HOWTOPLAY;
-			sButtonSettings = EN_en.BUTTON_SETTINGS;
-			sButtonExit = EN_en.BUTTON_EXIT;
-			break;
-
-		case "FR_fr":
-			sTitle = FR_fr.TITLE;
-			sButtonLocal = FR_fr.BUTTON_LOCAL;
-			sButtonOnline = FR_fr.BUTTON_ONLINE;
-			sButtonCreation = FR_fr.BUTTON_CREATION;
-			sButtonHowToPlay = FR_fr.BUTTON_HOWTOPLAY;
-			sButtonSettings = FR_fr.BUTTON_SETTINGS;
-			sButtonExit = FR_fr.BUTTON_EXIT;
-			break;
-		default:
-			break;
-		}		
+		}	
 	}
 
 	@Override

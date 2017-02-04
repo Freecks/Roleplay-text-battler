@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -19,8 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import lang.EN_en;
-import lang.FR_fr;
 
 public class Settings extends JFrame implements ActionListener{
 
@@ -91,31 +91,19 @@ private void initString() {
 			prop.load(input);
 			language = prop.getProperty("language");
 			input.close();
+			
+			input = new FileInputStream("lang/" + language + ".properties");
+			prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
+			sTitle = prop.getProperty("TITLE");
+			sLblLanguage = prop.getProperty("LBL_LANGUAGE");
+			sLanguageFr = prop.getProperty("LANGUAGE_FR");
+			sLanguageEn = prop.getProperty("LANGUAGE_EN");
+			sButtonAccept = prop.getProperty("BUTTON_ACCEPT");
+			sButtonCancel = prop.getProperty("BUTTON_CANCEL");
+			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		switch (language) {
-		case "EN_en":
-			sTitle = EN_en.TITLE;
-			sLblLanguage = EN_en.LBL_LANGUAGE;
-			sLanguageFr = EN_en.LANGUAGE_FR;
-			sLanguageEn = EN_en.LANGUAGE_EN;
-			sButtonAccept = EN_en.BUTTON_ACCEPT;
-			sButtonCancel = EN_en.BUTTON_CANCEL;
-			break;
-
-		case "FR_fr":
-			sTitle = FR_fr.TITLE;
-			sLblLanguage = FR_fr.LBL_LANGUAGE;
-			sLanguageFr = FR_fr.LANGUAGE_FR;
-			sLanguageEn = FR_fr.LANGUAGE_EN;
-			sButtonAccept = FR_fr.BUTTON_ACCEPT;
-			sButtonCancel = FR_fr.BUTTON_CANCEL;
-			break;
-		default:
-			break;
-		}		
+		}	
 	}
 
 @Override

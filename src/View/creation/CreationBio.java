@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -24,8 +26,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import lang.EN_en;
-import lang.FR_fr;
 
 public class CreationBio extends JPanel implements ActionListener{
 	
@@ -122,25 +122,16 @@ public class CreationBio extends JPanel implements ActionListener{
 			prop.load(input);
 			language = prop.getProperty("language");
 			input.close();
+			
+			input = new FileInputStream("lang/" + language + ".properties");
+			prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
+			sNameL = prop.getProperty("LABEL_NAME");
+			sBioL = prop.getProperty("LABEL_BIO");
+			sButton = prop.getProperty("LABEL_BUTTON_IMAGE");
+			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		switch (language) {
-		case "EN_en":
-			sNameL = EN_en.LABEL_NAME;
-			sBioL = EN_en.LABEL_BIO;		
-			sButton = EN_en.LABEL_BUTTON_IMAGE;
-			break;
-
-		case "FR_fr":
-			sNameL = FR_fr.LABEL_NAME;
-			sBioL = FR_fr.LABEL_BIO;
-			sButton = FR_fr.LABEL_BUTTON_IMAGE;
-			break;
-		default:
-			break;
-		}		
+		}	
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -21,8 +23,6 @@ import View.creation.CreationBio;
 import View.creation.CreationCapacities;
 import View.creation.CreationEquipments;
 import View.creation.CreationLimbs;
-import lang.EN_en;
-import lang.FR_fr;
 
 public class Creation extends JFrame implements ActionListener{
 
@@ -127,27 +127,18 @@ public class Creation extends JFrame implements ActionListener{
 			prop.load(input);
 			language = prop.getProperty("language");
 			input.close();
+			
+			input = new FileInputStream("lang/" + language + ".properties");
+			prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
+			sTitle = prop.getProperty("TITLE");
+			sCapacities = prop.getProperty("TAB_CAPACITIES");
+			sLimbs = prop.getProperty("TAB_LIMBS");
+			sEquipments = prop.getProperty("TAB_EQUIPMENTS");
+			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		switch (language) {
-		case "EN_en":
-			sTitle = EN_en.TITLE;
-			sCapacities = EN_en.TAB_CAPACITIES;
-			sLimbs = EN_en.TAB_LIMBS;
-			sEquipments = EN_en.TAB_EQUIPMENTS; 
-			break;
-
-		case "FR_fr":
-			sTitle = FR_fr.TITLE;
-			sCapacities = FR_fr.TAB_CAPACITIES;
-			sLimbs = FR_fr.TAB_LIMBS;
-			sEquipments = FR_fr.TAB_EQUIPMENTS; 
-			break;
-		default:
-			break;
-		}	
 	}
 
 
