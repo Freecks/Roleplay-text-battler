@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import View.creation.CreationBio;
@@ -30,9 +31,10 @@ public class Creation extends JFrame implements ActionListener{
 	private JList listChar;
 	private CreationBio bio;
 	private JTabbedPane parts;
-	private JPanel limbs;
-	private JPanel equipments;
-	private JPanel capacities;
+	private CreationLimbs limbs;
+	private CreationEquipments equipments;
+	private CreationCapacities capacities;
+	private JScrollPane limbsScroll;
 	private JButton back;
 	
 	private String sTitle;
@@ -77,11 +79,12 @@ public class Creation extends JFrame implements ActionListener{
 		back = new JButton("<-");
 		back.addActionListener(this);
 		limbs = new CreationLimbs();
+		limbsScroll = new JScrollPane(limbs,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		equipments = new CreationEquipments();
 		capacities = new CreationCapacities();
 		
 		parts.add(capacities, sCapacities);
-		parts.add(limbs, sLimbs);
+		parts.add(limbsScroll, sLimbs);
 		parts.add(equipments, sEquipments);
 		
 		c.gridx = 0;
@@ -95,13 +98,15 @@ public class Creation extends JFrame implements ActionListener{
 		c.gridheight = 2;
 		frame.add(listChar,c);
 		c.weightx = 0.75;
-		c.weighty = 0.33;
+		c.weighty = 0.40;
 		c.gridx = 1;
 		c.gridheight = 1;
 		frame.add(bio,c);
+		bio.setPreferredSize(new Dimension(0,0));
 		c.gridy = 2;
-		c.weighty = 0.67;
+		c.weighty = 0.60;
 		frame.add(parts,c);
+		parts.setPreferredSize(new Dimension(0,0));
 		
 		
 		this.setContentPane(frame);

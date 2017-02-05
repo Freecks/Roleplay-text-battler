@@ -76,7 +76,6 @@ public class CreationBio extends JPanel implements ActionListener{
 		c.weightx = 0.2;
 		c.gridheight = 2;
 		c.fill = GridBagConstraints.BOTH;
-		//c.insets = (new Insets(10, 10, 10, 0));
 		this.add(imageL,c);
 		c.gridy = 2;
 		c.weighty = 0.15;
@@ -86,17 +85,18 @@ public class CreationBio extends JPanel implements ActionListener{
 		c.gridx++;
 		c.gridy = 0;
 		c.weightx = 0.05;
-		c.weighty = 0.1;
+		c.weighty = 0;
 		c.insets = (new Insets(10, 0, 10, 5));
 		this.add(nameL,c);
 		c.gridx++;
 		c.weightx = 0.75;
+		c.ipady = 5;
 		c.insets = (new Insets(10, 5, 10, 10));
 		this.add(name,c);
 		c.gridx--;
 		c.gridy++;
 		c.weightx = 0.05;
-		c.weighty = 0.9;
+		c.weighty = 1;
 		c.ipady = 15;
 		c.anchor = GridBagConstraints.NORTH;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -126,7 +126,7 @@ public class CreationBio extends JPanel implements ActionListener{
 			input = new FileInputStream("lang/" + language + ".properties");
 			prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
 			sNameL = prop.getProperty("LABEL_NAME");
-			sBioL = prop.getProperty("LABEL_BIO");
+			sBioL = prop.getProperty("LABEL_DESCRIPTION");
 			sButton = prop.getProperty("LABEL_BUTTON_IMAGE");
 			input.close();
 		} catch (Exception e) {
@@ -150,34 +150,36 @@ public class CreationBio extends JPanel implements ActionListener{
 	public void setImage(){	
 		BufferedImage bi = null;
         try {
-        	bi = ImageIO.read(imageFile);
+        	if(imageFile!= null) bi = ImageIO.read(imageFile);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-        ImageIcon imageTemp = new ImageIcon(bi);
-        
-		int h = imageL.getHeight(), w = imageL.getWidth();
-		int nw = imageTemp.getIconWidth();
-        int nh = imageTemp.getIconHeight();
-		
-		if(imageTemp.getIconWidth() > w)
-        {
-          nw = w;
-          nh = (nw * imageTemp.getIconHeight()) / imageTemp.getIconWidth();
-        }
+        if(bi != null){
+        	ImageIcon imageTemp = new ImageIcon(bi);
+            
+    		int h = imageL.getHeight(), w = imageL.getWidth();
+    		int nw = imageTemp.getIconWidth();
+            int nh = imageTemp.getIconHeight();
+    		
+    		if(imageTemp.getIconWidth() > w)
+            {
+              nw = w;
+              nh = (nw * imageTemp.getIconHeight()) / imageTemp.getIconWidth();
+            }
 
-        if(nh > h)
-        {
-          nh = h;
-          nw = (imageTemp.getIconWidth() * nh) / imageTemp.getIconHeight();
+            if(nh > h)
+            {
+              nh = h;
+              nw = (imageTemp.getIconWidth() * nh) / imageTemp.getIconHeight();
+            }
+    	    
+    	    image.setImage(imageTemp.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
+    	    imageL.setIcon(image);
+    	    imageL.setPreferredSize(new Dimension(0,0));
+    	    
+            this.revalidate();
+            this.repaint();  
         }
-	    
-	    image.setImage(imageTemp.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
-	    imageL.setIcon(image);
-	    imageL.setPreferredSize(new Dimension(0,0));
-	    
-        this.revalidate();
-        this.repaint();  
 	}
 	
 }

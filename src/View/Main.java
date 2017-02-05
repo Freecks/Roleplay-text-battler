@@ -1,5 +1,7 @@
 package View;
 
+import model.Limb;
+
 public class Main {
 	
 
