@@ -66,15 +66,17 @@ public class CreationLimbs extends JPanel implements ActionListener{
 		c.anchor = GridBagConstraints.WEST;
 		c.insets = new Insets(0,5,5,0);
 		this.add(add,c);
+		this.revalidate();
+		this.repaint();
 	}
 	
-	public void addLimb(String file){
+	public void addLimb(String file, String name){
 		Properties prop = new Properties();
 		InputStream input = null;
 		try{
 			input = new FileInputStream("limbs/" + file + ".properties");
 			prop.load(input);
-			limbs.add(new LimbBox(prop.getProperty("name"), prop.getProperty("description")));
+			limbs.add(new LimbBox(name, prop.getProperty("name"), prop.getProperty("description")));
 			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();

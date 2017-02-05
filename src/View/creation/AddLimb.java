@@ -16,13 +16,16 @@ import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import model.Limb;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class AddLimb extends JFrame implements ActionListener{
 	
 	private JPanel frame;
+	private JLabel name;
+	private JTextField nameValue;
 	private JComboBox<String> listLimbs;
 	private JButton newLimb;
 	private JButton accept;
@@ -30,6 +33,7 @@ public class AddLimb extends JFrame implements ActionListener{
 	private CreationLimbs parent;
 	
 	private String sTitleAddLimb;
+	private String sName;
 	private String sButtonAccept;
 	private String sButtonCancel;
 	private String sNewButton;
@@ -43,6 +47,9 @@ public class AddLimb extends JFrame implements ActionListener{
 		frame = new JPanel();
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		name = new JLabel(sName);
+		nameValue = new JTextField();
+		nameValue.setPreferredSize(new Dimension(70,20));
 		String[] datas = getLimbs();
 		listLimbs = new JComboBox<String>(datas);
 		newLimb = new JButton(sNewButton);
@@ -54,22 +61,30 @@ public class AddLimb extends JFrame implements ActionListener{
 		cancel.addActionListener(this);
 		
 		c.fill = GridBagConstraints.BOTH;
-		c.weightx = 1;
+		c.weightx = 0;
 		c.weighty = 0;
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = (new Insets(10, 20, 10, 5));
+		frame.add(name);
+		c.weightx = 1;
+		c.gridx++;
+		c.insets = (new Insets(10, 5, 10, 20));
+		frame.add(nameValue);
+		c.gridx--;
+		c.gridy++;
+		c.insets = (new Insets(10, 20, 10, 5));
 		frame.add(listLimbs,c);
-		c.gridx = 1;
+		c.gridx++;
 		c.weightx = 0;
 		c.insets = (new Insets(10, 20, 10, 40));
 		frame.add(newLimb,c);
 		c.insets = (new Insets(10, 20, 10, 40));
 		c.weightx = 1;
-		c.gridy = 1;
-		c.gridx = 0;
+		c.gridy++;
+		c.gridx--;
 		frame.add(accept,c);
-		c.gridx = 1;
+		c.gridx++;
 		c.insets = (new Insets(10, 0, 10, 20));
 		frame.add(cancel,c);
 		
@@ -109,6 +124,7 @@ public class AddLimb extends JFrame implements ActionListener{
 			sButtonAccept = prop.getProperty("BUTTON_ACCEPT");
 			sButtonCancel = prop.getProperty("BUTTON_CANCEL");
 			sNewButton = prop.getProperty("BUTTON_NEW");
+			sName = prop.getProperty("LABEL_NAME");
 			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,7 +138,7 @@ public class AddLimb extends JFrame implements ActionListener{
 			new CreateLimb(parent);
 		}
 		if(e.getSource() == accept){
-			parent.addLimb((String)(listLimbs.getSelectedItem()));
+			parent.addLimb((String)(listLimbs.getSelectedItem()),nameValue.getText());
 		}
 		this.dispose();
 	}
